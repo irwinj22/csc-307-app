@@ -1,26 +1,10 @@
 import React, { useState } from "react";
 import Table from "./Table"
+import Form from "./Form"
 
 // function that returns what is supposed to be rendered on the screen
 function MyApp() {
-    const [characters, setCharacters] = useState([
-        {
-            name: "Charlie",
-            job: "Janitor"
-          },
-          {
-            name: "Mac",
-            job: "Bouncer"
-          },
-          {
-            name: "Dee",
-            job: "Aspring actress"
-          },
-          {
-            name: "Dennis",
-            job: "Bartender"
-          }
-    ])
+    const [characters, setCharacters] = useState([])
 
     // creating a function to remove a character from the table
     function removeOneCharacter(index) {
@@ -37,9 +21,10 @@ function MyApp() {
               characterData = {characters}
               removeCharacter = {removeOneCharacter}
             />
+            <Form />
         </div>
-    )
-};
+    );
+}
 
 // allow the componenent to be exported to other components or files
 export default MyApp;
