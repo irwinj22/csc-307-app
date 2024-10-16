@@ -65,7 +65,9 @@ const deleteUserById = (id) => {
 }
 
 const generateRandomId = () => {
-    let id = Math.random * 1000;
+    // found method of generating 6 digit numbers:
+    // https://stackoverflow.com/questions/21816595/how-to-generate-a-random-number-of-fixed-length-using-javascript
+    let id = (Math.floor(100000 + Math.random() * 900000)).toString();
     return id;
 }
 

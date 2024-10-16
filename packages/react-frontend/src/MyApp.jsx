@@ -17,7 +17,7 @@ function MyApp() {
                 const updated = characters.filter((character, i) => {
                     return i !== index;
                 });
-                setCharacters(updated);
+                setCharacters([... updated]);
             } else {
                 console.log("Unexpected status code: ${response.status}");
             }
