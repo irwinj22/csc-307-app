@@ -111,7 +111,7 @@ app.post("/users", (req, res) => {
     const id = generateRandomId();
     userToAdd.id = id;
     addUser(userToAdd);
-    res.status(201).send();
+    res.status(201).json(userToAdd);
 });
 
 app.delete("/users/:id", (req, res) => {
@@ -120,7 +120,7 @@ app.delete("/users/:id", (req, res) => {
     if (result == undefined) {
         res.status(404).send("Resource not found.");
     } else {
-        res.send(result);
+        res.status(204).send();
     }
 });
 

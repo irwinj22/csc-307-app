@@ -7,21 +7,37 @@ function MyApp() {
     const [characters, setCharacters] = useState([])
 
     // creating a function to remove a character from the table
+    // maybe I am passing the wrong param? I am not sure what to make of this one TBH
     function removeOneCharacter(index) {
-        const updated = characters.filter((character, i) => {
-            return i !== index;
+        const id = characters[index].id;
+
+        deleteUser(id)
+        .then((response) => {
+            if (response.status === 204) {
+                const updated = characters.filter((character, i) => {
+                    return i !== index;
+                });
+                setCharacters(updated);
+            } else {
+                console.log("Unexpected status code: ${response.status}");
+            }
+        })
+        .catch((error) => {
+            console.log(error);
         });
-        setCharacters(updated);
-    }
+    };
 
     function updateList(person) {
       postUser(person)
       .then((response) => {
         if (response.status === 201) {
-            setCharacters([...characters, person]);
+            return response.json();
         } else {
             console.log("Unexpected status code: ${response.status}");
       }})
+      .then((updatedUser) => {
+        setCharacters([... characters, updatedUser]);
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -41,6 +57,18 @@ function MyApp() {
             body: JSON.stringify(person)
         });
 
+        return promise;
+    }
+
+    // for some reason, not able to delete a user .. cannot determine why though
+    function deleteUser(id) {
+        const promise = fetch(`http://localhost:8000/users/${id}`, {
+            method: "DELETE", 
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        });
+        
         return promise;
     }
 
