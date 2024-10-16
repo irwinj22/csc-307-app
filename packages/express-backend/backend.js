@@ -112,8 +112,14 @@ app.post("/users", (req, res) => {
     const userToAdd = req.body;
     const id = generateRandomId();
     userToAdd.id = id;
-    addUser(userToAdd);
-    res.status(201).json(userToAdd);
+    let result = addUser(userToAdd);
+    if (result === undefined) {
+        res.status(404).send("Resource not found");
+    } else {
+        res.status(201).json(userToAdd);
+    }
+    // TODO: let result === ? 
+    // addUser(userToAdd);
 });
 
 app.delete("/users/:id", (req, res) => {
