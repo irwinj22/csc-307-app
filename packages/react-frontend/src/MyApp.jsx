@@ -9,9 +9,8 @@ function MyApp() {
     // creating a function to remove a character from the table
     // maybe I am passing the wrong param? I am not sure what to make of this one TBH
     function removeOneCharacter(index) {
-        const id = characters[index].id;
-
-        deleteUser(id)
+        const _id = characters[index]._id;
+        deleteUser(_id)
         .then((response) => {
             if (response.status === 204) {
                 const updated = characters.filter((character, i) => {
@@ -61,8 +60,8 @@ function MyApp() {
     }
 
     // for some reason, not able to delete a user .. cannot determine why though
-    function deleteUser(id) {
-        const promise = fetch(`http://localhost:8000/users/${id}`, {
+    function deleteUser(_id) {
+        const promise = fetch(`http://localhost:8000/users/${_id}`, {
             method: "DELETE", 
             headers: {
                 "Content-Type" : "application/json"
