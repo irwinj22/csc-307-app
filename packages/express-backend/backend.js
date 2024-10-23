@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import userService from "./services/user-service.js";
-//import { restart } from "nodemon";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
@@ -66,7 +65,6 @@ app.post("/users", (req, res) => {
     })
 });
 
-// TODO: have to implement this myself
 app.delete("/users/:id", (req, res) => {
     const id = req.params["id"];
     deleteUserById(id)
